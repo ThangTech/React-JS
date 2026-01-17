@@ -1,6 +1,12 @@
+import './style.css'
+
+
 const MyComponent = () => {
        return (
-              <div>Đây là một component tự tạo</div>
+              <>
+              <div style={{fontStyle: "italic"}}>Đây là một component tự tạo</div>
+              <div className='text'>Sử dụng fragment giúp tránh render thừa html</div>
+              </>
        );
 }
 export default MyComponent;
