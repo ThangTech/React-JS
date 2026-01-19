@@ -10,11 +10,15 @@ const App = () => {
               commune: "An Tao",
               province: "Hung Yen"
        }
+       const addNewTodo = (name) => {
+              alert(`Hello ${name}`);
+       }
   return (
   <>
        <div className="todo-container">
               <div className="todo-title"><h1>Todo list</h1></div>
-              <TodoNew/>
+              <TodoNew 
+              addNewTodo={addNewTodo}/>
               <TodoData 
               name={name}
               age={age}
