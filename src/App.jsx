@@ -5,6 +5,9 @@ import reactLogo from './assets/react.svg'
 import { useState } from 'react';
 
 const App = () => {
+       const randomIntInterval = (min, max) => {
+              return Math.floor(Math.random()*(max-min+1) + min);
+       }
        const [todoList, setTodoList] = useState([
               {id: 1, name: "Learning React"},
               {id: 2, name: "Learning TypeScript"}
@@ -16,7 +19,11 @@ const App = () => {
               province: "Hung Yen"
        }
        const addNewTodo = (name) => {
-              alert(`Hello ${name}`);
+              const newTodo = {
+                     id: randomIntInterval(3, 20),
+                     name: name
+              }
+              setTodoList([...todoList, newTodo])
        }
   return (
   <>

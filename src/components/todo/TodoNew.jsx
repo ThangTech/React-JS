@@ -7,7 +7,8 @@ const TodoNew = (props) => {
        const [valueInput, setValueInput] = useState("Thắng"); //Khởi tạo giá trị mặc dịnh cho state
 
        const handleClick = () => {
-              console.log("check value input", valueInput);
+              addNewTodo(valueInput);
+              setValueInput(""); //xét giá trị bằng rỗng
        }
        const handleOnChange = (name) => {
               setValueInput(name)
@@ -16,6 +17,7 @@ const TodoNew = (props) => {
               <div className='todo-new'>
                      <input type="text" placeholder='Enter your task'
                      onChange={() => handleOnChange(event.target.value)}
+                     value={valueInput}
                      />
                      <button style={{cursor: "pointer"}} 
                      onClick={handleClick}
