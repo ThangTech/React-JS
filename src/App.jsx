@@ -9,15 +9,15 @@ const App = () => {
               return Math.floor(Math.random()*(max-min+1) + min);
        }
        const [todoList, setTodoList] = useState([
-              {id: 1, name: "Learning React"},
-              {id: 2, name: "Learning TypeScript"}
+              // {id: 1, name: "Learning React"},
+              // {id: 2, name: "Learning TypeScript"}
        ])
-       const name = "Nguyen Quoc Viet";
-       const age = 20;
-       const hometown = {
-              commune: "An Tao",
-              province: "Hung Yen"
-       }
+       // const name = "Nguyen Quoc Viet";
+       // const age = 20;
+       // const hometown = {
+       //        commune: "An Tao",
+       //        province: "Hung Yen"
+       // }
        const addNewTodo = (name) => {
               const newTodo = {
                      id: randomIntInterval(3, 20),
@@ -32,9 +32,9 @@ const App = () => {
               <TodoNew 
               addNewTodo={addNewTodo}/>
               <TodoData 
-              name={name}
-              age={age}
-              hometown={hometown}
+              // name={name}
+              // age={age}
+              // hometown={hometown}
               todoList={todoList}       
               />
               <div className='todo-image'>
