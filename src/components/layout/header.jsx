@@ -1,16 +1,16 @@
 import "../../style/layout/header.css"
-
+import {Link} from "react-router"; //Link de chuyen huong giua cac trang khac nhau ma khong can tai lai trang
 const Header = () => {
   return (
       <ul>
         <li>
-          <a href="/">Home</a>
+          <Link to="/" className="active">Home</Link>
         </li>
         <li>
-          <a href="/user">Users</a>
+          <Link to="/user">Users</Link>
         </li>
         <li>
-          <a href="/product">Products</a>
+          <Link to="/product">Products</Link>
         </li>
       </ul>
   );
