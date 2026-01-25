@@ -5,14 +5,16 @@ import { createBrowserRouter, RouterProvider } from "react-router";
 import LoginPage from "./pages/login.jsx";
 import RegisterPage from "./pages/register.jsx";
 import UserPage from "./pages/user.jsx";
-import ProductPage from "./pages/product.jsx";
+import BookPage from "./pages/book.jsx";
 import "./style/style.css";
 import TodoApp from "./components/todo/TodoApp.jsx";
+import ErrorPage from "./pages/error.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <ErrorPage />, //nếu route ko đúng sẽ render component này
     children: [
       {
        index: true,
@@ -23,8 +25,8 @@ const router = createBrowserRouter([
         element: <UserPage />,
       },
       {
-        path: "/product",
-        element: <ProductPage />,
+        path: "/book",
+        element: <BookPage />,
       },
     ],
   },
