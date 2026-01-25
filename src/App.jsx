@@ -5,7 +5,7 @@ import reactLogo from "./assets/react.svg";
 import { useState } from "react";
 import Header from "./components/layout/header";
 import Footer from "./components/layout/footer";
-
+import {Outlet} from "react-router";
 const App = () => {
   const randomIntInterval = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -65,6 +65,7 @@ const App = () => {
           </div>
         )}
       </div>
+      <Outlet/> //render component con theo route
       <Footer/>
     </>
   );
