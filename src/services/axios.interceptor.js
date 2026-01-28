@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://localhost:8080",
+  baseURL: import.meta.env.VITE_BACKEND_URL,
 });
 
 instance.interceptors.request.use(
@@ -18,14 +18,16 @@ instance.interceptors.request.use(
 // Add a response interceptor
 instance.interceptors.response.use(
   function (response) {
-    // Any status code that lies within the range of 2xx causes this function to trigger
-    // Do something with response data
+    // Bất kỳ mã trạng thái nào nằm trong phạm vi 2xx đều kích hoạt hàm này
+   // Xử lý dữ liệu phản hồi
     if(response.data && response.data.data) return response.data;
     return response;
   },
   function (error) {
-    // Any status codes that fall outside the range of 2xx cause this function to trigger
-    // Do something with response error
+    // Bất kỳ mã trạng thái nào nằm ngoài phạm vi 2xx đều khiến hàm này được kích hoạt
+    // Xử lý lỗi phản hồi
+    // Chạy vào chế độ debug sử dụng "debugger"
+    if(error.response && error.response.data) return error.response.data;
     return Promise.reject(error);
   },
 );
