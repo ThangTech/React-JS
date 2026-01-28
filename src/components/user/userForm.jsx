@@ -1,16 +1,21 @@
 import { Input, Button } from "antd";
 import { useState } from "react";
+import axios from "axios"
 const UserForm = () => {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
   const handleClick = () => {
-       const nameValue = fullName;
-       const emailValue = email;
-       const passwordValue = password;
-       const phoneValue = phone;
-       console.log(nameValue, emailValue, passwordValue, phoneValue)
+       const url = "http://localhost:8080/api/v1/user";
+       const data = {
+              fullName: fullName,
+              email: email,
+              password: password,
+              phone: phone
+       }
+       axios.post(url, data)
+       
   }
   return (
     <div>
