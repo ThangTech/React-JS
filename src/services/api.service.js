@@ -13,4 +13,8 @@ const createUser = (fullName, email, password, phone) => {
 const updateUser = () => {
 
 }
-export {createUser, updateUser}
+const fetchAllUser = () => {
+       const url = "/api/v1/user";
+       return axios.get(url)
+}
+export {createUser, updateUser, fetchAllUser}

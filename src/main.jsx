@@ -39,9 +39,9 @@ const router = createBrowserRouter([
     element: <RegisterPage />,
   },
 ]);
-
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
+// Bỏ strictmode nếu ko muốn render 2 lần
+  <StrictMode> 
     {/* <App /> */}
     <RouterProvider router={router}></RouterProvider>
   </StrictMode>,
