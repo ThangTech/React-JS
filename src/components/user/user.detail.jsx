@@ -1,7 +1,8 @@
-import { Button, Drawer } from "antd";
+import { Button, Drawer, notification } from "antd";
 import { useState } from "react";
+import { handleUploadFile, updateUserAvatar } from "../../services/api.service";
 const ViewModal = (props) => {
-  const { dataDetail, setDataDetail, isDetailOpen, setIsDetailOpen } = props;
+  const { dataDetail, setDataDetail, isDetailOpen, setIsDetailOpen, loadUser } = props;
   const [selectedFile, setSelectedFile] = useState()
   const [preview, setPreview] = useState()
   const handleOnChangeFile = () => {
@@ -16,6 +17,39 @@ const ViewModal = (props) => {
               setPreview(URL.createObjectURL(file))
         } 
     }
+   const handleUpdateUserAvatar = async () => {
+       //step 1: upload file
+       const res = await handleUploadFile(selectedFile, "avatar");
+       if(res.data){
+              const newAvatar = res.data.fileUploaded;
+              const resAvatar = await updateUserAvatar( newAvatar, dataDetail._id, dataDetail.fullName, dataDetail.phone);
+              if(resAvatar.data){
+                   setIsDetailOpen(false);
+                   setSelectedFile(null);
+                   setPreview(null)
+                   await loadUser();
+                   notification.success({
+                     message: "Success upload",
+                     description: "Cap nhat thanh cong"
+              })    
+              }
+              else{
+                    notification.error({
+                     message: "Error update avatar",
+                     description: JSON.stringify(resAvatar.message)
+              })  
+              }
+       }
+       else{
+              notification.error({
+                     message: "Error upload",
+                     description: JSON.stringify(res.message)
+              })
+
+       }
+
+       //step 2: update user
+   }
   return (
     <>
       <Drawer
@@ -50,12 +84,14 @@ const ViewModal = (props) => {
               onChange={(event) => handleOnChangeFile(event)}/>
         </div>
         {preview &&
+       <>
         <div>
              <img 
              height={200} width={300}
              src={preview}/>
-
+             <Button type="primary" style={{display: "block"}} onClick={() => handleUpdateUserAvatar()}>Save</Button>
         </div>
+        </>
        }
         {/* <Button type="primary">Upload Image</Button> */}
         </> : <p>Some thing went wrong...</p>}

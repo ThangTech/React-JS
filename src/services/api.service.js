@@ -24,7 +24,30 @@ const deleteUser = (id) => {
        return axios.delete(url);
 }
 const fetchAllUser = () => {
-       const url = "/api/v1/user";
+       const url = "/api/v1/user?current=1&pageSize=1";
        return axios.get(url)
 }
-export {createUser, updateUser, fetchAllUser, deleteUser}
+const handleUploadFile = (file, folder) => {
+       const url = `/api/v1/file/upload`
+       let config = {
+              headers: {
+                     "upload-type": folder,
+                     "Content-Type": "multipart/form-data" 
+              }
+       }
+       const bodyFormData = new FormData();
+       bodyFormData.append("fileImg", file)
+
+       return axios.post(url, bodyFormData, config)
+}
+const updateUserAvatar = (avatar, _id, fullName, phone) => {
+       const url = "/api/v1/user";
+       const data = {
+              _id: _id,
+              avatar: avatar,
+              fullName: fullName,
+              phone: phone
+       }
+       return axios.put(url, data)
+}
+export {createUser, updateUser, fetchAllUser, deleteUser, handleUploadFile, updateUserAvatar}
