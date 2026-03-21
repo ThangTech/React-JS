@@ -6,7 +6,7 @@ import { useState } from "react";
 import ViewModal from "./user.detail";
 import { deleteUser } from "../../services/api.service";
 const UserTable = (props) => {
-  const { dataUsers, loadUser } = props;
+  const { dataUsers, loadUser, current, pageSize, total, setCurrent, setPageSize } = props;
   const [isModalUpdate, setIsModalUpdate] = useState(false);
   const [dataUpdate, setDataUpdate] = useState(null);
   const [dataDetail, setDataDetail] = useState(null);
@@ -17,7 +17,7 @@ const UserTable = (props) => {
       render: (_, record, index) => {
         return (
           <>
-            {index + 1}
+            {(index + 1) + (current - 1) * pageSize}
           </>
         );
       },
@@ -92,26 +92,44 @@ const UserTable = (props) => {
       });
     }
   };
+  const onChange = (pagination, filters, sorter, extra) => {
+       if(pagination && pagination.current){
+              if(pagination.current !== +current){
+                     setCurrent(+pagination.current) // dau + convert tu string sang số
+              }
+       }
+
+       if(pagination && pagination.pageSize){
+              if(pagination.pageSize !== +pageSize){
+                     setPageSize(+pagination.pageSize) // dau + convert tu string sang số
+              }
+       }
+       console.log({pagination, filters, sorter, extra})
+  }
   return (
     <>
-      <Table columns={columns} dataSource={dataUsers} rowKey={"_id"}
+      <Table columns={columns} 
+      dataSource={dataUsers} 
+      rowKey={"_id"}
       pagination={
        {
-              current: 1,
-              pageSize: 10,
+              current: current,
+              pageSize: pageSize,
               showSizeChanger: true,
               total: total,
               showTotal: (total, range) => {
                      return (
                             <div>
-                                   {range[0]}-{range[1]} trên {total} rpws
+                                   {range[0]}-{range[1]} trên {total} rows
                             </div>
                      )
-              }
+              },
+              
+              
 
        }
-       
       }
+      onChange={onChange}
       />
       <UpdateUserModal
         isModalUpdate={isModalUpdate}

@@ -23,8 +23,8 @@ const deleteUser = (id) => {
        const url = `/api/v1/user/${id}`
        return axios.delete(url);
 }
-const fetchAllUser = () => {
-       const url = "/api/v1/user?current=1&pageSize=1";
+const fetchAllUser = (current, pageSize) => {
+       const url = `/api/v1/user?current=${current}&pageSize=${pageSize}`;
        return axios.get(url)
 }
 const handleUploadFile = (file, folder) => {
