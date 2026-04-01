@@ -50,4 +50,14 @@ const updateUserAvatar = (avatar, _id, fullName, phone) => {
        }
        return axios.put(url, data)
 }
-export {createUser, updateUser, fetchAllUser, deleteUser, handleUploadFile, updateUserAvatar}
+const registerUser = (fullName, email, password, phone) => {
+       const url = "/api/v1/user/register";
+       const data = {
+              fullName: fullName,
+              email: email,
+              password: password,
+              phone: phone
+       }
+       return axios.post(url, data)
+}
+export {createUser, updateUser, fetchAllUser, deleteUser, handleUploadFile, updateUserAvatar, registerUser}

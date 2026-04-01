@@ -1,10 +1,6 @@
 // import "../../style/layout/header.css"
-import { Menu } from "antd";
-import {
-  UserOutlined,
-  HomeOutlined,
-  BookOutlined
-} from "@ant-design/icons";
+import { Button, Menu } from "antd";
+import { UserOutlined, HomeOutlined, BookOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import { Link, NavLink } from "react-router"; //Link de chuyen huong giua cac trang khac nhau ma khong can tai lai trang
 //NavLink de biet duoc trang nao dang duoc chon và co the them class active
@@ -32,6 +28,17 @@ const Header = () => {
     },
   ];
   return (
+    <div>
+      <Menu
+        onClick={onClick}
+        selectedKeys={[current]}
+        mode="horizontal"
+        items={items}
+      />
+      <Button type="primary" style={{position: "absolute", top: "0", right: "0", margin: "10px 20px"}}>
+              <Link to={"/register"}>Register</Link>
+      </Button>
+    </div>
     //       <ul>
     //         <li>
     //           <NavLink to="/">Home</NavLink>
@@ -43,12 +50,6 @@ const Header = () => {
     //           <NavLink to="/book">Books</NavLink>
     //         </li>
     //       </ul>
-    <Menu
-      onClick={onClick}
-      selectedKeys={[current]}
-      mode="horizontal"
-      items={items}
-    />
   );
 };
 export default Header;
