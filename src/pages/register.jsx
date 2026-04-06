@@ -1,6 +1,15 @@
-import { Input, Button, Modal, Form, notification, Row, Col } from "antd";
+import {
+  Input,
+  Button,
+  Modal,
+  Form,
+  notification,
+  Row,
+  Col,
+  Divider,
+} from "antd";
 import { registerUser } from "../services/api.service";
-import { useNavigate } from "react-router";
+import { useNavigate, Link } from "react-router";
 const RegisterPage = () => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
@@ -27,76 +36,84 @@ const RegisterPage = () => {
     }
   };
   return (
-    <Form
-      name="basic"
-      form={form}
-      labelCol={{ span: 8 }}
-      wrapperCol={{ span: 16 }}
-      onFinish={onFinish}
-      //       onFinishFailed={onFinishFailed}
-      autoComplete="off"
-    >
-      <Row gutter={[16, 16]} justify={"center"}>
-        <Col xs={24} sm={24} md={24} lg={24}>
-          <Form.Item
-            layout="vertical"
-            label="Full Name"
-            name="username"
-            rules={[{ required: true, message: "Please input your username!" }]}
-          >
-            <Input />
-          </Form.Item>
-        </Col>
+    <>
+      <Form
+        name="basic"
+        form={form}
+        labelCol={{ span: 8 }}
+        wrapperCol={{ span: 16 }}
+        onFinish={onFinish}
+        //       onFinishFailed={onFinishFailed}
+        autoComplete="off"
+      >
+        <Row gutter={[16, 16]} justify={"center"}>
+          <Col xs={24} sm={24} md={24} lg={24}>
+            <Form.Item
+              layout="vertical"
+              label="Full Name"
+              name="username"
+              rules={[
+                { required: true, message: "Please input your username!" },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+          </Col>
 
-        <Col xs={24} sm={24} md={24} lg={24}>
-          <Form.Item
-            layout="vertical"
-            label="Email"
-            name="email"
-            rules={[{ required: true, message: "Please input your email!" }]}
-          >
-            <Input />
-          </Form.Item>
-        </Col>
+          <Col xs={24} sm={24} md={24} lg={24}>
+            <Form.Item
+              layout="vertical"
+              label="Email"
+              name="email"
+              rules={[{ required: true, message: "Please input your email!" }]}
+            >
+              <Input />
+            </Form.Item>
+          </Col>
 
-        <Col xs={24} sm={24} md={24} lg={24}>
-          <Form.Item
-            layout="vertical"
-            label="Password"
-            name="password"
-            rules={[{ required: true, message: "Please input your password!" }]}
-          >
-            <Input.Password />
-          </Form.Item>
-        </Col>
+          <Col xs={24} sm={24} md={24} lg={24}>
+            <Form.Item
+              layout="vertical"
+              label="Password"
+              name="password"
+              rules={[
+                { required: true, message: "Please input your password!" },
+              ]}
+            >
+              <Input.Password />
+            </Form.Item>
+          </Col>
 
-        <Col xs={24} sm={24} md={24} lg={24}>
-          <Form.Item
-            layout="vertical"
-            label="Phone"
-            name="phone"
-            rules={[
-              {
-                required: true,
-                //   type: "regexp",
-                pattern: new RegExp(/\d+/g),
-                message: "Wrong format!",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-        </Col>
+          <Col xs={24} sm={24} md={24} lg={24}>
+            <Form.Item
+              layout="vertical"
+              label="Phone"
+              name="phone"
+              rules={[
+                {
+                  required: true,
+                  //   type: "regexp",
+                  pattern: new RegExp(/\d+/g),
+                  message: "Wrong format!",
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+          </Col>
 
-        <Col xs={24} sm={24} md={24} lg={24}>
-          <Form.Item>
-            <Button type="primary" onClick={() => form.submit()}>
-              Register
-            </Button>
-          </Form.Item>
-        </Col>
-      </Row>
-    </Form>
+          <Col xs={24} sm={24} md={24} lg={24}>
+            <Form.Item>
+              <Button type="primary" onClick={() => form.submit()}>
+                Register
+              </Button>
+            </Form.Item>
+          </Col>
+        </Row>
+      </Form>
+      <Divider />
+      <div>Đã có tài khoản <Link to={"/login"}>đăng nhập ngay</Link></div>
+    </>
   );
 };
 export default RegisterPage;

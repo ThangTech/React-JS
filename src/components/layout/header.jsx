@@ -38,6 +38,9 @@ const Header = () => {
       <Button type="primary" style={{position: "absolute", top: "0", right: "0", margin: "10px 20px"}}>
               <Link to={"/register"}>Register</Link>
       </Button>
+      <Button type="primary" style={{position: "absolute", top: "0", right: "100px", margin: "10px 20px"}}>
+              <Link to={"/login"}>Login</Link>
+      </Button>
     </div>
     //       <ul>
     //         <li>

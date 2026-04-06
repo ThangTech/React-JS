@@ -60,4 +60,13 @@ const registerUser = (fullName, email, password, phone) => {
        }
        return axios.post(url, data)
 }
-export {createUser, updateUser, fetchAllUser, deleteUser, handleUploadFile, updateUserAvatar, registerUser}
+const LoginApi = (email, password) => {
+       const url = "/api/v1/auth/login";
+       const data = {
+              username: email,
+              password: password,
+              delay: 5000
+       }
+       return axios.post(url, data)
+}
+export {createUser, updateUser, fetchAllUser, deleteUser, handleUploadFile, updateUserAvatar, registerUser, LoginApi}
