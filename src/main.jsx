@@ -9,6 +9,7 @@ import BookPage from "./pages/book.jsx";
 import "./style/style.css";
 import TodoApp from "./components/todo/TodoApp.jsx";
 import ErrorPage from "./pages/error.jsx";
+import { AuthWrapper } from "./components/context/auth.context.jsx";
 
 const router = createBrowserRouter([
   {
@@ -17,8 +18,8 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />, //nếu route ko đúng sẽ render component này
     children: [
       {
-       index: true,
-       element: <TodoApp />,
+        index: true,
+        element: <TodoApp />,
       },
       {
         path: "/user",
@@ -40,9 +41,11 @@ const router = createBrowserRouter([
   },
 ]);
 createRoot(document.getElementById("root")).render(
-// Bỏ strictmode nếu ko muốn render 2 lần
-  <StrictMode> 
+  // Bỏ strictmode nếu ko muốn render 2 lần
+  <StrictMode>
     {/* <App /> */}
-    <RouterProvider router={router}></RouterProvider>
+    <AuthWrapper>
+      <RouterProvider router={router}></RouterProvider>
+    </AuthWrapper>
   </StrictMode>,
 );

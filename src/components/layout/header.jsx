@@ -1,11 +1,16 @@
 // import "../../style/layout/header.css"
 import { Button, Menu } from "antd";
 import { UserOutlined, HomeOutlined, BookOutlined } from "@ant-design/icons";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, NavLink } from "react-router"; //Link de chuyen huong giua cac trang khac nhau ma khong can tai lai trang
+import { AuthContext } from "../context/auth.context";
 //NavLink de biet duoc trang nao dang duoc chon và co the them class active
 const Header = () => {
   const [current, setCurrent] = useState("");
+  
+  const {user} = useContext(AuthContext);
+  console.log(user)
+
   const onClick = (e) => {
     console.log("click ", e);
     setCurrent(e.key);
