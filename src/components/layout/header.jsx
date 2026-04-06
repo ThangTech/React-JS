@@ -1,19 +1,37 @@
 // import "../../style/layout/header.css"
-import { Button, Menu } from "antd";
+import { Button, Menu, message } from "antd";
 import { UserOutlined, HomeOutlined, BookOutlined } from "@ant-design/icons";
 import { useContext, useState } from "react";
-import { Link, NavLink } from "react-router"; //Link de chuyen huong giua cac trang khac nhau ma khong can tai lai trang
+import { Link, NavLink, useNavigate } from "react-router"; //Link de chuyen huong giua cac trang khac nhau ma khong can tai lai trang
 import { AuthContext } from "../context/auth.context";
+import { logOutApi } from "../../services/api.service";
 //NavLink de biet duoc trang nao dang duoc chon và co the them class active
 const Header = () => {
   const [current, setCurrent] = useState("");
 
-  const { user } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
+  const navigate = useNavigate();
   console.log(user);
 
   const onClick = (e) => {
     console.log("click ", e);
     setCurrent(e.key);
+  };
+  const handleLogout = async () => {
+    const res = await logOutApi();
+    if (res.data) {
+      localStorage.removeItem("token");
+      setUser({
+        email: "",
+        phone: "",
+        fullName: "",
+        role: "",
+        avatar: "",
+        id: "",
+      });
+      message.success("Đăng xuất thành công");
+      navigate("/")
+    }
   };
   const items = [
     {
@@ -74,8 +92,9 @@ const Header = () => {
             right: "100px",
             margin: "10px 20px",
           }}
+          onClick={handleLogout}
         >
-          <Link to={"/login"}>Logout</Link>
+          <span>Logout</span>
         </Button>
       )}
     </div>
