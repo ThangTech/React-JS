@@ -7,9 +7,9 @@ import { AuthContext } from "../context/auth.context";
 //NavLink de biet duoc trang nao dang duoc chon và co the them class active
 const Header = () => {
   const [current, setCurrent] = useState("");
-  
-  const {user} = useContext(AuthContext);
-  console.log(user)
+
+  const { user } = useContext(AuthContext);
+  console.log(user);
 
   const onClick = (e) => {
     console.log("click ", e);
@@ -40,12 +40,44 @@ const Header = () => {
         mode="horizontal"
         items={items}
       />
-      <Button type="primary" style={{position: "absolute", top: "0", right: "0", margin: "10px 20px"}}>
-              <Link to={"/register"}>Register</Link>
-      </Button>
-      <Button type="primary" style={{position: "absolute", top: "0", right: "100px", margin: "10px 20px"}}>
-              <Link to={"/login"}>Login</Link>
-      </Button>
+      // có user
+      {user.id && (
+        <div
+          style={{
+            position: "absolute",
+            top: "0",
+            right: "400px",
+            margin: "10px 20px",
+          }}
+        >
+          Chào mừng {user.fullName}{" "}
+        </div>
+      )}
+      {!user.id ? (
+        <Button
+          type="primary"
+          style={{
+            position: "absolute",
+            top: "0",
+            right: "100px",
+            margin: "10px 20px",
+          }}
+        >
+          <Link to={"/login"}>Login</Link>
+        </Button>
+      ) : (
+        <Button
+          type="primary"
+          style={{
+            position: "absolute",
+            top: "0",
+            right: "100px",
+            margin: "10px 20px",
+          }}
+        >
+          <Link to={"/login"}>Logout</Link>
+        </Button>
+      )}
     </div>
     //       <ul>
     //         <li>

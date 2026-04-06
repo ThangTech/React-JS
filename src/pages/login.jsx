@@ -87,7 +87,9 @@ const LoginPage = () => {
                 }
               ]}
             >
-              <Input.Password />
+              <Input.Password onKeyDown={(event) => {
+                     if(event.key === 'Enter') form.submit();
+              }} />
             </Form.Item>
           </Col>
           <Col xs={24} sm={24} md={24} lg={24}>
